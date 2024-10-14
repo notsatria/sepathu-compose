@@ -68,6 +68,12 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    // Compose Navigation
+    implementation("androidx.navigation:navigation-compose:2.8.2")
+
+    // Compose Material
+    implementation("androidx.compose.material:material:1.7.3")
+
     // Room
     implementation(libs.room)
     ksp(libs.roomCompiler)
