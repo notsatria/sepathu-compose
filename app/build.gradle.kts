@@ -72,4 +72,10 @@ dependencies {
     implementation(libs.room)
     ksp(libs.roomCompiler)
     implementation(libs.roomKtx)
+
+    // Koin
+    implementation(project.dependencies.platform(libs.koin.bom))
+    implementation(libs.koin.core)
+    implementation(libs.koin.compose)
+    implementation(libs.koin.compose.navigation)
 }
