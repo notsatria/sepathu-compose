@@ -23,8 +23,7 @@ interface ShoeDao {
     @Query("SELECT * FROM shoe WHERE is_on_cart = 1")
     fun getShoesOnCart(): Flow<List<ShoeEntity>>
 
-    @Query("SELECT * FROM shoe WHERE is_on_cart = :categoryId")
+    @Query("SELECT * FROM shoe WHERE category_id = :categoryId")
     fun getShoesByCategory(categoryId: Int): Flow<List<ShoeEntity>>
-
 
 }

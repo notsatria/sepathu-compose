@@ -53,7 +53,7 @@ fun ShoeItem(modifier: Modifier = Modifier, shoe: ShoeEntity) {
                 text =  getCategoryName(shoe.categoryId),
                 fontSize = 14.sp,
                 color = TextGrey,
-                modifier = modifier.padding(start = 20.dp, top = 30.dp)
+                modifier = modifier.padding(start = 20.dp, top = 12.dp)
             )
             Text(
                 text = shoe.name.uppercase(),
@@ -68,7 +68,7 @@ fun ShoeItem(modifier: Modifier = Modifier, shoe: ShoeEntity) {
                 fontSize = 16.sp,
                 color = Blue,
                 fontWeight = FontWeight.SemiBold,
-                modifier = modifier.padding(start = 20.dp, top = 6.dp, end = 20.dp, bottom = 20.dp)
+                modifier = modifier.padding(start = 20.dp, top = 2.dp, end = 20.dp, bottom = 20.dp)
             )
         }
     }
