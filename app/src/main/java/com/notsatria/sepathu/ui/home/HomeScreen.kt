@@ -20,6 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.notsatria.sepathu.R
 import com.notsatria.sepathu.ui.components.ShoeCategoryChip
 import com.notsatria.sepathu.ui.components.ShoeItem
@@ -31,9 +32,10 @@ import org.koin.androidx.compose.koinViewModel
 fun HomeScreen(modifier: Modifier = Modifier) {
 
     val viewModel: HomeViewModel = koinViewModel()
+
     val categories = viewModel.shoeCategories
 
-    val selectedCategory by viewModel.chipSelected.collectAsState()
+    val selectedCategory by viewModel.chipSelected.collectAsStateWithLifecycle()
     val shoes by viewModel.shoes.collectAsState()
 
     LaunchedEffect(Unit) {
@@ -55,7 +57,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
             color = TextGrey,
             modifier = Modifier.padding(start = 16.dp, top = 2.dp)
         )
-        LazyRow {
+        LazyRow(modifier = Modifier.padding(end = 16.dp)) {
             items(categories) { category ->
                 ShoeCategoryChip(
                     onClick = {

@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Sepathu</string>
     <string name="happy_shopping">Happy shopping, %1$s</string>
+    <string name="your_cart">Your Cart</string>
+    <string name="remove">Remove</string>
+    <string name="grand_total">Grand Total</string>
 </resources>

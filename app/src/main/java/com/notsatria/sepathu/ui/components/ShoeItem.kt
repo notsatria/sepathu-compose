@@ -45,7 +45,7 @@ fun ShoeItem(modifier: Modifier = Modifier, shoe: ShoeEntity) {
                 contentDescription = shoe.name,
                 contentScale = ContentScale.Crop,
                 modifier = modifier
-                    .padding(top = 20.dp)
+                    .padding(top = 12.dp)
                     .fillMaxWidth()
                     .height(140.dp)
             )
@@ -61,14 +61,14 @@ fun ShoeItem(modifier: Modifier = Modifier, shoe: ShoeEntity) {
                 color = TextBlack,
                 fontWeight = FontWeight.Bold,
                 maxLines = 2,
-                modifier = modifier.padding(start = 20.dp, top = 6.dp, end = 20.dp)
+                modifier = modifier.padding(start = 20.dp, top = 4.dp, end = 20.dp)
             )
             Text(
                 text = shoe.price.convertToDollar(),
                 fontSize = 16.sp,
                 color = Blue,
                 fontWeight = FontWeight.SemiBold,
-                modifier = modifier.padding(start = 20.dp, top = 2.dp, end = 20.dp, bottom = 20.dp)
+                modifier = modifier.padding(start = 20.dp, top = 2.dp, end = 20.dp, bottom = 12.dp)
             )
         }
     }

@@ -26,7 +26,7 @@ class HomeViewModel(private val shoeRepository: ShoeRepository) : ViewModel() {
         ShoeCategory(0, "Running"),
         ShoeCategory(1, "Walking"),
         ShoeCategory(2, "Casual"),
-        ShoeCategory(3, "Formal"),
+        ShoeCategory(3, "Basketball"),
     )
 
     fun setChipSelected(selectedId: Int) {

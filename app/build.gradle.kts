@@ -69,10 +69,13 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     // Compose Navigation
-    implementation("androidx.navigation:navigation-compose:2.8.2")
+    implementation(libs.androidx.navigation.compose)
 
     // Compose Material
-    implementation("androidx.compose.material:material:1.7.3")
+    implementation(libs.androidx.material)
+
+    // Compose Icon
+    implementation(libs.androidx.material.icons.extended)
 
     // Room
     implementation(libs.room)
