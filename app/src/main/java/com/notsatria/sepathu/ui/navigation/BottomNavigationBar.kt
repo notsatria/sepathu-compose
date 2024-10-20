@@ -10,21 +10,20 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemColors
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.currentBackStackEntryAsState
 import com.notsatria.sepathu.ui.theme.DarkGrey
 import com.notsatria.sepathu.ui.theme.Purple
 import com.notsatria.sepathu.ui.theme.SoftBlack
 import com.notsatria.sepathu.ui.theme.SoftPurple
 
 @Composable
-fun BottomNavigationBar(navController: NavHostController, modifier: Modifier = Modifier) {
+fun BottomNavigationBar(
+    navController: NavHostController,
+    modifier: Modifier = Modifier,
+    currentRoute: String? = null
+) {
     NavigationBar(modifier, containerColor = SoftBlack) {
-        val navBackStackEntry by navController.currentBackStackEntryAsState()
-        val currentRoute = navBackStackEntry?.destination?.route
-
         val navItems = listOf(
             NavigationItem("Home", Icons.Default.Home, Screen.Home),
             NavigationItem("Cart", Icons.Default.ShoppingCart, Screen.Cart),

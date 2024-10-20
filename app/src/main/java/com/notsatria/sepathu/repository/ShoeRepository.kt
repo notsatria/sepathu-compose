@@ -2,10 +2,12 @@ package com.notsatria.sepathu.repository
 
 import com.notsatria.sepathu.data.entities.ShoeEntity
 import com.notsatria.sepathu.data.room.ShoeDao
+import com.notsatria.sepathu.utils.DataDummy
 
 class ShoeRepository(
     private val shoeDao: ShoeDao
 ) {
+
     fun getAllShoes() = shoeDao.getAllShoes()
 
     fun getShoeById(id: Int) = shoeDao.getShoeById(id)

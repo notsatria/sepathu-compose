@@ -87,4 +87,5 @@ dependencies {
     implementation(libs.koin.core)
     implementation(libs.koin.compose)
     implementation(libs.koin.compose.navigation)
+
 }
