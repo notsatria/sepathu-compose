@@ -4,6 +4,7 @@ import androidx.room.Room
 import com.notsatria.sepathu.MainViewModel
 import com.notsatria.sepathu.data.room.ShoeDatabase
 import com.notsatria.sepathu.repository.ShoeRepository
+import com.notsatria.sepathu.ui.cart.CartViewModel
 import com.notsatria.sepathu.ui.detail.DetailViewModel
 import com.notsatria.sepathu.ui.home.HomeViewModel
 import org.koin.android.ext.koin.androidContext
@@ -30,4 +31,5 @@ val viewModelModule = module {
     viewModel { MainViewModel(get()) }
     viewModel { HomeViewModel(get()) }
     viewModel { DetailViewModel(get()) }
+    viewModel { CartViewModel(get()) }
 }

@@ -29,6 +29,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -62,6 +63,8 @@ fun DetailScreen(
         3
     }
 
+    val context = LocalContext.current
+
     viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { uiState ->
         when (uiState) {
             is UiState.Loading -> {
@@ -69,12 +72,24 @@ fun DetailScreen(
             }
 
             is UiState.Success -> {
-                DetailContent(
-                    modifier = modifier,
+                DetailContent(modifier = modifier,
                     shoe = uiState.data,
                     pagerState = pagerState,
-                    navigateBack = navigateBack
-                )
+                    navigateBack = navigateBack,
+                    addToCart = {
+                        viewModel.addToCart(uiState.data.id, !uiState.data.isOnCart)
+                        val message = if (uiState.data.isOnCart) {
+                            context.getString(R.string.remove_from_cart)
+                        } else {
+                            context.getString(R.string.added_to_cart)
+                        }
+                        Toast.makeText(
+                            context,
+                            message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                    })
             }
 
             is UiState.Error -> {}
@@ -87,7 +102,8 @@ fun DetailContent(
     modifier: Modifier = Modifier,
     shoe: ShoeEntity,
     pagerState: PagerState,
-    navigateBack: () -> Unit
+    navigateBack: () -> Unit,
+    addToCart: () -> Unit = {}
 ) {
     val context = LocalContext.current
     Box {
@@ -136,15 +152,11 @@ fun DetailContent(
                 }
                 Spacer(modifier = Modifier.height(30.dp))
                 Text(
-                    text = stringResource(R.string.description),
-                    fontSize = 14.sp,
-                    color = White
+                    text = stringResource(R.string.description), fontSize = 14.sp, color = White
                 )
                 Spacer(modifier = Modifier.height(12.dp))
                 Text(
-                    text = shoe.description,
-                    fontSize = 14.sp,
-                    color = TextDisabled
+                    text = shoe.description, fontSize = 14.sp, color = TextDisabled
                 )
             }
         }
@@ -157,12 +169,12 @@ fun DetailContent(
                 .padding(top = 20.dp, start = 20.dp, end = 16.dp)
         ) {
             IconButton(
-                onClick = { Toast.makeText(context,
-                    context.getString(R.string.coming_soon), Toast.LENGTH_SHORT).show() },
-                modifier = Modifier.border(
-                    width = 1.dp,
-                    color = Purple,
-                    shape = RoundedCornerShape(12.dp)
+                onClick = {
+                    Toast.makeText(
+                        context, context.getString(R.string.coming_soon), Toast.LENGTH_SHORT
+                    ).show()
+                }, modifier = Modifier.border(
+                    width = 1.dp, color = Purple, shape = RoundedCornerShape(12.dp)
                 )
             ) {
                 Icon(
@@ -173,18 +185,23 @@ fun DetailContent(
             }
             Spacer(modifier = Modifier.width(16.dp))
             Button(
-                onClick = {},
+                onClick = addToCart,
                 colors = ButtonColors(
-                    contentColor = White,
-                    containerColor = Purple,
+                    contentColor = if (shoe.isOnCart) Purple else White,
+                    containerColor = if (shoe.isOnCart) Color.Transparent else Purple,
                     disabledContentColor = TextDisabled,
                     disabledContainerColor = Purple
                 ),
                 shape = RoundedCornerShape(12.dp),
                 contentPadding = PaddingValues(vertical = 12.dp),
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .border(if (shoe.isOnCart) 1.dp else 0.dp, Purple, RoundedCornerShape(12.dp))
             ) {
-                Text(text = stringResource(R.string.add_to_cart))
+                Text(
+                    text = if (shoe.isOnCart) stringResource(R.string.remove_from_cart)
+                    else stringResource(R.string.add_to_cart)
+                )
             }
         }
     }

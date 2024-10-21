@@ -118,11 +118,14 @@ fun HomeContent(
                     ShoeItem(shoe = shoe, onAddToCartClick = {
                         viewModel.updateShoeOnCart(shoe.id, !shoe.isOnCart)
 
-                        Toast.makeText(
-                            context,
+                        val message =
                             if (!shoe.isOnCart) context.getString(R.string.added_to_cart) else context.getString(
                                 R.string.removed_from_cart
-                            ),
+                            )
+
+                        Toast.makeText(
+                            context,
+                            message,
                             Toast.LENGTH_SHORT
                         ).show()
                     }, modifier = Modifier.clickable {
