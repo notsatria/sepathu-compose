@@ -14,4 +14,7 @@
     <string name="removed_from_cart">Removed from cart</string>
     <string name="empty_cart">Oops! Your Cart is Empty</string>
     <string name="remove_from_cart">Remove from Cart</string>
+    <string name="developer_name">Damar Satria Buana</string>
+    <string name="developer_email">buanasatriaa@gmail.com</string>
+    <string name="profile">Profile</string>
 </resources>
