@@ -1,6 +1,7 @@
 package com.notsatria.sepathu.ui.search
 
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.material.icons.Icons
@@ -23,6 +25,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -36,7 +39,11 @@ import com.notsatria.sepathu.ui.theme.White
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun SearchScreen(modifier: Modifier = Modifier, viewModel: SearchViewModel = koinViewModel()) {
+fun SearchScreen(
+    modifier: Modifier = Modifier,
+    viewModel: SearchViewModel = koinViewModel(),
+    navigateToDetail: (Int) -> Unit
+) {
 
     viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { uiState ->
         when (uiState) {
@@ -45,7 +52,12 @@ fun SearchScreen(modifier: Modifier = Modifier, viewModel: SearchViewModel = koi
             }
 
             is UiState.Success -> {
-                SearchContent(modifier = modifier, shoes = uiState.data, viewModel = viewModel)
+                SearchContent(
+                    modifier = modifier,
+                    shoes = uiState.data,
+                    viewModel = viewModel,
+                    navigateToDetail = navigateToDetail
+                )
             }
 
             is UiState.Error -> {
@@ -55,15 +67,16 @@ fun SearchScreen(modifier: Modifier = Modifier, viewModel: SearchViewModel = koi
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchContent(
     modifier: Modifier = Modifier,
     shoes: List<ShoeEntity>,
-    viewModel: SearchViewModel
+    viewModel: SearchViewModel,
+    navigateToDetail: (Int) -> Unit
 ) {
-    Column(modifier) {
+    val context = LocalContext.current
 
+    Column(modifier.fillMaxSize()) {
         Text(
             stringResource(R.string.search),
             color = White,
@@ -73,28 +86,15 @@ fun SearchContent(
                 .padding(vertical = 16.dp)
                 .align(Alignment.CenterHorizontally),
         )
-        TextField(
+        SearchTextField(
             value = viewModel.searchQuery,
             onValueChange = { text ->
                 viewModel.updateQuery(text)
                 viewModel.searchShoes(text)
             },
-            leadingIcon = {
-                Icon(imageVector = Icons.Default.Search, contentDescription = "Search")
-            },
-            singleLine = true,
-            shape = RoundedCornerShape(16.dp),
-            colors = TextFieldDefaults.textFieldColors(
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent
-            ),
-            keyboardActions = KeyboardActions(onSearch = {
+            onSearchAction = {
                 viewModel.searchShoes(viewModel.searchQuery)
-            }),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp)
-        )
+            })
         if (shoes.isEmpty()) {
             EmptyState(
                 modifier = Modifier.fillMaxSize(),
@@ -108,10 +108,57 @@ fun SearchContent(
                     .padding(top = 16.dp)
             ) {
                 items(shoes) { shoe ->
-                    HorizontalShoeItem(shoe = shoe)
+                    HorizontalShoeItem(
+                        shoe = shoe,
+                        onItemClicked = {
+                            navigateToDetail(shoe.id)
+                        },
+                        onCartClicked = {
+                            viewModel.updateShoeOnCart(shoe.id, !shoe.isOnCart)
+                            val message = if (shoe.isOnCart) {
+                                context.getString(R.string.remove_from_cart)
+                            } else {
+                                context.getString(R.string.added_to_cart)
+                            }
+                            Toast.makeText(
+                                context,
+                                message,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    )
                     Spacer(modifier = Modifier.height(12.dp))
                 }
             }
         }
     }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun SearchTextField(
+    modifier: Modifier = Modifier,
+    value: String,
+    onValueChange: (String) -> Unit,
+    onSearchAction: () -> Unit
+) {
+    TextField(
+        value = value,
+        onValueChange = onValueChange,
+        leadingIcon = {
+            Icon(imageVector = Icons.Default.Search, contentDescription = "Search")
+        },
+        singleLine = true,
+        shape = CircleShape,
+        colors = TextFieldDefaults.textFieldColors(
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent
+        ),
+        keyboardActions = KeyboardActions(onSearch = {
+            onSearchAction()
+        }),
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp)
+    )
 }

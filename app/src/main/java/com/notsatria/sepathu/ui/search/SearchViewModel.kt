@@ -36,4 +36,13 @@ class SearchViewModel(private val shoeRepository: ShoeRepository) : ViewModel() 
             }
         }
     }
+
+    fun updateShoeOnCart(shoeId: Int, isOnCart: Boolean) {
+        if (_uiState.value !is UiState.Success) return
+        val updatedShoes = (_uiState.value as UiState.Success<List<ShoeEntity>>).data.map { shoe ->
+            if (shoe.id == shoeId) shoe.copy(isOnCart = isOnCart) else shoe
+        }
+        _uiState.value = UiState.Success(updatedShoes)
+    }
+
 }

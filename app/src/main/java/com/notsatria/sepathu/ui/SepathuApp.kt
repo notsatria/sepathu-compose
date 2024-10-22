@@ -59,7 +59,11 @@ fun SepathuApp(
                 )
             }
             composable(Screen.Search.route) {
-                SearchScreen()
+                SearchScreen(
+                    navigateToDetail = { shoeId ->
+                        navController.navigate(Screen.DetailShoe.createRoute(shoeId))
+                    }
+                )
             }
             composable(Screen.Cart.route) {
                 CartScreen()
