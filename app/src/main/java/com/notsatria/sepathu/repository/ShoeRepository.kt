@@ -19,4 +19,6 @@ class ShoeRepository(
     fun getShoesByCategory(categoryId: Int) = shoeDao.getShoesByCategory(categoryId)
 
     fun insertShoe(shoe: ShoeEntity) = shoeDao.insertShoe(shoe)
+
+    fun searchShoes(query: String) = shoeDao.searchShoes(query)
 }

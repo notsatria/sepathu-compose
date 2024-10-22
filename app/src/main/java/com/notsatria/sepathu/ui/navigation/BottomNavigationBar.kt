@@ -3,6 +3,7 @@ package com.notsatria.sepathu.ui.navigation
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -26,6 +27,7 @@ fun BottomNavigationBar(
     NavigationBar(modifier, containerColor = SoftBlack) {
         val navItems = listOf(
             NavigationItem("Home", Icons.Default.Home, Screen.Home),
+            NavigationItem("Search", Icons.Default.Search, Screen.Search),
             NavigationItem("Cart", Icons.Default.ShoppingCart, Screen.Cart),
             NavigationItem("Profile", Icons.Default.AccountCircle, Screen.Profile),
         )

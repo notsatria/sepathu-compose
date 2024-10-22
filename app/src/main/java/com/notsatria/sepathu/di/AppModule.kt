@@ -7,6 +7,7 @@ import com.notsatria.sepathu.repository.ShoeRepository
 import com.notsatria.sepathu.ui.cart.CartViewModel
 import com.notsatria.sepathu.ui.detail.DetailViewModel
 import com.notsatria.sepathu.ui.home.HomeViewModel
+import com.notsatria.sepathu.ui.search.SearchViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
@@ -32,4 +33,5 @@ val viewModelModule = module {
     viewModel { HomeViewModel(get()) }
     viewModel { DetailViewModel(get()) }
     viewModel { CartViewModel(get()) }
+    viewModel { SearchViewModel(get()) }
 }

@@ -27,4 +27,6 @@ interface ShoeDao {
     @Query("SELECT * FROM shoe WHERE category_id = :categoryId")
     fun getShoesByCategory(categoryId: Int): Flow<List<ShoeEntity>>
 
+    @Query("SELECT * FROM shoe WHERE name LIKE '%' || :query || '%' OR description LIKE '%' || :query || '%' OR price LIKE '%' || :query || '%'")
+    fun searchShoes(query: String): Flow<List<ShoeEntity>>
 }

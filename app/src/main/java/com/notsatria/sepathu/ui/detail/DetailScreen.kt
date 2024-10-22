@@ -38,7 +38,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.notsatria.sepathu.R
 import com.notsatria.sepathu.data.entities.ShoeEntity
-import com.notsatria.sepathu.data.entities.getCategoryName
 import com.notsatria.sepathu.ui.commons.UiState
 import com.notsatria.sepathu.ui.components.ImagePager
 import com.notsatria.sepathu.ui.theme.Blue
@@ -49,6 +48,7 @@ import com.notsatria.sepathu.ui.theme.TextDisabled
 import com.notsatria.sepathu.ui.theme.TextGrey
 import com.notsatria.sepathu.ui.theme.White
 import com.notsatria.sepathu.utils.convertToDollar
+import com.notsatria.sepathu.utils.getCategoryName
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -112,7 +112,7 @@ fun DetailContent(
                 .fillMaxHeight()
                 .verticalScroll(rememberScrollState())
         ) {
-            ImagePager(pagerState = pagerState, navigateBack = navigateBack)
+            ImagePager(pagerState = pagerState, navigateBack = navigateBack, shoeId = shoe.id)
 
             Column(
                 modifier = Modifier

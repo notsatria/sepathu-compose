@@ -29,7 +29,6 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import com.notsatria.sepathu.R
 import com.notsatria.sepathu.data.entities.ShoeEntity
-import com.notsatria.sepathu.data.entities.getCategoryName
 import com.notsatria.sepathu.ui.theme.Blue
 import com.notsatria.sepathu.ui.theme.DotIndicatorDefault
 import com.notsatria.sepathu.ui.theme.Purple
@@ -38,6 +37,7 @@ import com.notsatria.sepathu.ui.theme.TextGrey
 import com.notsatria.sepathu.ui.theme.White
 import com.notsatria.sepathu.utils.DataDummy
 import com.notsatria.sepathu.utils.convertToDollar
+import com.notsatria.sepathu.utils.getCategoryName
 
 @Composable
 fun ShoeItem(modifier: Modifier = Modifier, shoe: ShoeEntity, onAddToCartClick: () -> Unit = {}) {

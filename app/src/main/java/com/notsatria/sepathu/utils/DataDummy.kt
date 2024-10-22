@@ -29,7 +29,7 @@ object DataDummy {
             id = 3,
             name = "Ultra 4D White Shoes",
             price = 120.12,
-            image = R.drawable.il_running_ultra4d_1,
+            image = R.drawable.il_running_ultra4d_white_1,
             categoryId = 0,
             description = "The Ultra 4D White Shoes bring together futuristic design and advanced performance features. A seamless knit upper wraps your foot, while the cutting-edge 4D midsole provides excellent cushioning and energy return. These shoes are perfect for both casual wear and running, offering a blend of style and comfort.",
             rating = 3.0,
@@ -166,4 +166,26 @@ object DataDummy {
             isOnCart = true,
         )
     )
+
+    fun getImagesById(id: Int): List<Int> {
+        return when (id) {
+            1 -> listOf(R.drawable.il_running_ultra4d_1, R.drawable.il_running_ultra4d_2, R.drawable.il_running_ultra4d_3)
+            2 -> listOf(R.drawable.il_running_sl20_1, R.drawable.il_running_sl20_2, R.drawable.il_running_sl20_3)
+            3 -> listOf(R.drawable.il_running_ultra4d_white_1, R.drawable.il_running_ultra4d_white_2, R.drawable.il_running_ultra4d_white_3)
+            4 -> listOf(R.drawable.il_running_ultraboost_1, R.drawable.il_running_ultraboost_2, R.drawable.il_running_ultraboost_3)
+            5 -> listOf(R.drawable.il_walking_lego_1, R.drawable.il_walking_lego_2, R.drawable.il_walking_lego_3)
+            6 -> listOf(R.drawable.il_walking_fortarun_1, R.drawable.il_walking_fortarun_2, R.drawable.il_walking_fortarun_3)
+            7 -> listOf(R.drawable.il_walking_supernova_1, R.drawable.il_walking_supernova_2, R.drawable.il_walking_supernova_3)
+            8 -> listOf(R.drawable.il_walking_faito_1, R.drawable.il_walking_faito_2, R.drawable.il_walking_faito_3)
+            9 -> listOf(R.drawable.il_basket_dame_1, R.drawable.il_basket_dame_2, R.drawable.il_basket_dame_3)
+            10 -> listOf(R.drawable.il_basket_don_issue_1, R.drawable.il_basket_don_issue_2, R.drawable.il_basket_don_issue_3)
+            11 -> listOf(R.drawable.il_basket_harden_1, R.drawable.il_basket_harden_2, R.drawable.il_basket_harden_3)
+            12 -> listOf(R.drawable.il_basket_proboost_1, R.drawable.il_basket_proboost_2, R.drawable.il_basket_proboost_3)
+            13 -> listOf(R.drawable.il_hiking_terrex_1, R.drawable.il_hiking_terrex_2, R.drawable.il_hiking_terrex_3)
+            14 -> listOf(R.drawable.il_hiking_don_issue_1, R.drawable.il_hiking_don_issue_2, R.drawable.il_hiking_don_issue_3)
+            15 -> listOf(R.drawable.il_hiking_terrex_urban_1, R.drawable.il_hiking_terrex_urban_2, R.drawable.il_hiking_terrex_urban_3)
+            16 -> listOf(R.drawable.il_hiking_terrex_ax_1, R.drawable.il_hiking_terrex_ax_2, R.drawable.il_hiking_terrex_ax_3)
+            else -> emptyList()
+        }
+    }
 }

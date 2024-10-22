@@ -2,7 +2,6 @@ package com.notsatria.sepathu.ui
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -21,6 +20,7 @@ import com.notsatria.sepathu.ui.home.HomeScreen
 import com.notsatria.sepathu.ui.navigation.BottomNavigationBar
 import com.notsatria.sepathu.ui.navigation.Screen
 import com.notsatria.sepathu.ui.profile.ProfileScreen
+import com.notsatria.sepathu.ui.search.SearchScreen
 import com.notsatria.sepathu.ui.theme.DarkNavy
 import org.koin.androidx.compose.koinViewModel
 
@@ -52,9 +52,14 @@ fun SepathuApp(
             modifier = Modifier.padding(innerPadding)
         ) {
             composable(Screen.Home.route) {
-                HomeScreen(navigateToDetail = { shoeId ->
-                    navController.navigate(Screen.DetailShoe.createRoute(shoeId))
-                })
+                HomeScreen(
+                    navigateToDetail = { shoeId ->
+                        navController.navigate(Screen.DetailShoe.createRoute(shoeId))
+                    },
+                )
+            }
+            composable(Screen.Search.route) {
+                SearchScreen()
             }
             composable(Screen.Cart.route) {
                 CartScreen()

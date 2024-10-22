@@ -4,7 +4,9 @@ import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -92,6 +94,7 @@ fun HomeContent(
             color = TextGrey,
             modifier = Modifier.padding(start = 16.dp, top = 2.dp)
         )
+        Spacer(modifier = Modifier.height(12.dp))
         LazyRow(modifier = Modifier.padding(end = 16.dp)) {
             items(categories) { category ->
                 ShoeCategoryChip(

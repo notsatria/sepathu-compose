@@ -19,24 +19,23 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.notsatria.sepathu.R
 import com.notsatria.sepathu.ui.theme.DarkNavy
+import com.notsatria.sepathu.utils.DataDummy
 
 @Composable
 fun ImagePager(
     modifier: Modifier = Modifier,
+    shoeId: Int,
     pagerState: PagerState,
     navigateBack: () -> Unit = {},
 ) {
+
+    val images = DataDummy.getImagesById(shoeId)
+
     Column(modifier) {
         Box(modifier = Modifier) {
             HorizontalPager(state = pagerState) { page ->
-                val image = when (page) {
-                    0 -> R.drawable.il_hiking_terrex_ax_1
-                    1 -> R.drawable.il_hiking_terrex_ax_2
-                    2 -> R.drawable.il_hiking_terrex_ax_3
-                    else -> R.drawable.ic_launcher_background
-                }
                 Image(
-                    painter = painterResource(id = image),
+                    painter = painterResource(id = images[page]),
                     contentDescription = "Image"
                 )
             }
