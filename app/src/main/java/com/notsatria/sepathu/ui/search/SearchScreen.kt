@@ -3,6 +3,7 @@ package com.notsatria.sepathu.ui.search
 import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -28,8 +29,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.notsatria.sepathu.R
 import com.notsatria.sepathu.data.entities.ShoeEntity
-import com.notsatria.sepathu.ui.cart.CartEmpty
 import com.notsatria.sepathu.ui.commons.UiState
+import com.notsatria.sepathu.ui.components.EmptyState
 import com.notsatria.sepathu.ui.components.HorizontalShoeItem
 import com.notsatria.sepathu.ui.theme.White
 import org.koin.androidx.compose.koinViewModel
@@ -95,7 +96,11 @@ fun SearchContent(
                 .padding(horizontal = 16.dp)
         )
         if (shoes.isEmpty()) {
-            CartEmpty()
+            EmptyState(
+                modifier = Modifier.fillMaxSize(),
+                imageResource = R.drawable.ic_search_off,
+                stringResource = R.string.empty_search
+            )
         } else {
             LazyColumn(
                 modifier = Modifier

@@ -18,4 +18,5 @@
     <string name="developer_email">buanasatriaa@gmail.com</string>
     <string name="profile">Profile</string>
     <string name="search">Search</string>
+    <string name="empty_search">Sorry, we couldn\'t find your request</string>
 </resources>

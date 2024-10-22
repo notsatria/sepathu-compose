@@ -28,6 +28,7 @@ import com.notsatria.sepathu.R
 import com.notsatria.sepathu.data.entities.ShoeEntity
 import com.notsatria.sepathu.ui.commons.UiState
 import com.notsatria.sepathu.ui.components.CartItem
+import com.notsatria.sepathu.ui.components.EmptyState
 import com.notsatria.sepathu.ui.theme.White
 import org.koin.androidx.compose.koinViewModel
 
@@ -57,7 +58,7 @@ fun CartScreen(modifier: Modifier = Modifier, viewModel: CartViewModel = koinVie
             }
 
             is UiState.Error -> {
-                Log.e("CartScreen", "CartScreen: ${uiState.errorMessage}", )
+                Log.e("CartScreen", "CartScreen: ${uiState.errorMessage}")
             }
         }
     }
@@ -81,7 +82,11 @@ fun CartContent(
         )
 
         if (shoes.isEmpty()) {
-            CartEmpty(Modifier.fillMaxSize())
+            EmptyState(
+                modifier = Modifier.fillMaxSize(),
+                imageResource = R.drawable.ic_cart,
+                stringResource = R.string.empty_cart
+            )
         } else {
             LazyColumn {
                 items(shoes) { shoe ->
@@ -96,33 +101,4 @@ fun CartContent(
             }
         }
     }
-}
-
-@Composable
-fun CartEmpty(modifier: Modifier = Modifier) {
-    Column(
-        modifier,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Image(
-            painter = painterResource(id = R.drawable.ic_cart),
-            contentDescription = "Cart",
-            modifier = Modifier.size(120.dp)
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-        Text(
-            stringResource(R.string.empty_cart),
-            color = White,
-            fontSize = 16.sp,
-            fontWeight = FontWeight.SemiBold,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
-        )
-    }
-}
-
-@Preview()
-@Composable
-fun CartScreenPreview() {
-    CartEmpty()
 }
