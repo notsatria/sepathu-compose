@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -106,7 +107,7 @@ fun DetailContent(
     addToCart: () -> Unit = {}
 ) {
     val context = LocalContext.current
-    Box {
+    Box(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = modifier
                 .fillMaxHeight()
@@ -158,9 +159,9 @@ fun DetailContent(
                 Text(
                     text = shoe.description, fontSize = 14.sp, color = TextDisabled
                 )
+                Spacer(modifier = Modifier.height(80.dp))
             }
         }
-        Spacer(modifier = Modifier.height(80.dp))
         Row(
             modifier = Modifier
                 .fillMaxWidth()
